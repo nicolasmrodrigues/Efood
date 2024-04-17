@@ -25,6 +25,7 @@ export const Image = styled.img`
 export const Description = styled.p`
   font-size: 14px;
   line-height: 22px;
+  min-height: 88px;
 `
 
 export const Button = styled.button`

@@ -1,5 +1,6 @@
 import star from '../../assets/images/star.png'
 import { RestaurantType } from '../../pages/Home'
+import formatDescription from '../../utils/FormatDescription'
 import * as S from './styles'
 
 type Props = {
@@ -35,7 +36,9 @@ const RestaurantCard = ({ restaurant }: Props) => {
             <S.Icon src={star} />
           </div>
         </S.TitleContainer>
-        <p>{restaurant.descricao}</p>
+        <S.Description>
+          {formatDescription(restaurant.descricao, 250)}
+        </S.Description>
         <S.Button to={`/restaurant/${restaurant.id}`}>Saiba mais</S.Button>
       </S.TextContainer>
     </S.Card>
