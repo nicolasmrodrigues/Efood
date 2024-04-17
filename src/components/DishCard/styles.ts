@@ -16,6 +16,12 @@ export const Title = styled.h3`
   margin: 8px 0;
 `
 
+export const Image = styled.img`
+  width: 100%;
+  height: 167px;
+  object-fit: cover;
+`
+
 export const Description = styled.p`
   font-size: 14px;
   line-height: 22px;

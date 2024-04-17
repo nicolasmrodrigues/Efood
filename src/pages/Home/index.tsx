@@ -1,73 +1,36 @@
+import { useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import RestaurantsList from '../../containers/RestaurantsList'
 import { Container } from '../../styles'
-import restaurantImage from '../../assets/images/italian-restaurant.png'
-import { RestaurantType } from '../../components/RestaurantCard'
+import { DishType } from '../RestaurantProfile'
 
-const restaurants: RestaurantType[] = [
-  {
-    image: restaurantImage,
-    infos: ['Italiana'],
-    name: 'La Dolce Vita Trattoria',
-    rating: '4.9',
-    description:
-      'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-    id: 1
-  },
-  {
-    image: restaurantImage,
-    infos: ['Italiana'],
-    name: 'La Dolce Vita Trattoria',
-    rating: '4.9',
-    description:
-      'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-    id: 2
-  },
-  {
-    image: restaurantImage,
-    infos: ['Italiana'],
-    name: 'La Dolce Vita Trattoria',
-    rating: '4.9',
-    description:
-      'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-    id: 3
-  },
-  {
-    image: restaurantImage,
-    infos: ['Italiana'],
-    name: 'La Dolce Vita Trattoria',
-    rating: '4.9',
-    description:
-      'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-    id: 4
-  },
-  {
-    image: restaurantImage,
-    infos: ['Italiana'],
-    name: 'La Dolce Vita Trattoria',
-    rating: '4.9',
-    description:
-      'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-    id: 5
-  },
-  {
-    image: restaurantImage,
-    infos: ['Italiana'],
-    name: 'La Dolce Vita Trattoria',
-    rating: '4.9',
-    description:
-      'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-    id: 6
-  }
-]
+export type RestaurantType = {
+  id: number
+  titulo: string
+  destacado: boolean
+  tipo: string
+  avaliacao: number
+  descricao: string
+  capa: string
+  cardapio: DishType[]
+}
 
-const Home = () => (
-  <>
-    <Header type="secondary" />
-    <Container>
-      <RestaurantsList items={restaurants} />
-    </Container>
-  </>
-)
+const Home = () => {
+  const [restaurants, setRestaurants] = useState<RestaurantType[]>([])
 
+  useEffect(() => {
+    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+      .then((response) => response.json())
+      .then((responseJson) => setRestaurants(responseJson))
+  }, [])
+
+  return (
+    <>
+      <Header type="secondary" />
+      <Container>
+        <RestaurantsList restaurants={restaurants} />
+      </Container>
+    </>
+  )
+}
 export default Home

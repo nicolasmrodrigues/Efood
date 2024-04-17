@@ -1,42 +1,45 @@
 import star from '../../assets/images/star.png'
+import { RestaurantType } from '../../pages/Home'
 import * as S from './styles'
 
-export type RestaurantType = {
-  image: string
-  infos: string[]
-  name: string
-  rating: string
-  description: string
-  id: number
+type Props = {
+  restaurant: RestaurantType
 }
 
-const RestaurantCard = ({
-  image,
-  infos,
-  name,
-  rating,
-  description,
-  id
-}: RestaurantType) => (
-  <S.Card>
-    <S.Image src={image} alt="" />
-    <S.Infos>
-      {infos.map((info) => (
-        <S.Info key={info}>{info}</S.Info>
-      ))}
-    </S.Infos>
-    <S.TextContainer>
-      <S.TitleContainer>
-        <S.Title>{name}</S.Title>
-        <div>
-          <S.Title as="span">{rating}</S.Title>
-          <S.Icon src={star} />
-        </div>
-      </S.TitleContainer>
-      <p>{description}</p>
-      <S.Button to={`/restaurant/${id}`}>Saiba mais</S.Button>
-    </S.TextContainer>
-  </S.Card>
-)
+const RestaurantCard = ({ restaurant }: Props) => {
+  const getInfos = () => {
+    const infos = []
+
+    if (restaurant.destacado) {
+      infos.push('Destaque da semana')
+    }
+
+    infos.push(restaurant.tipo)
+
+    return infos
+  }
+
+  return (
+    <S.Card>
+      <S.Image src={restaurant.capa} alt="" />
+      <S.Infos>
+        {getInfos().map((info) => (
+          <S.Info key={info}>{info}</S.Info>
+        ))}
+      </S.Infos>
+      <S.TextContainer>
+        <S.TitleContainer>
+          <S.Title>{restaurant.titulo}</S.Title>
+          <div>
+            <S.Title as="span">{restaurant.avaliacao}</S.Title>
+            <S.Icon src={star} />
+          </div>
+        </S.TitleContainer>
+        <p>{restaurant.descricao}</p>
+        <S.Button to={`/restaurant/${restaurant.id}`}>Saiba mais</S.Button>
+      </S.TextContainer>
+    </S.Card>
+  )
+}
 
 export default RestaurantCard
