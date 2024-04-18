@@ -9,13 +9,7 @@ type Props = {
 const DishesList = ({ dishes }: Props) => (
   <List>
     {dishes.map((dish) => (
-      <DishCard
-        image={dish.foto}
-        name={dish.nome}
-        description={dish.descricao}
-        id={dish.id}
-        key={dish.id}
-      />
+      <DishCard dish={dish} key={dish.id} />
     ))}
   </List>
 )

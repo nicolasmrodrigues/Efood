@@ -1,18 +1,16 @@
 import formatDescription from '../../utils/FormatDescription'
 import * as S from './styles'
+import { DishType } from '../../pages/RestaurantProfile'
 
 export type Props = {
-  image: string
-  name: string
-  description: string
-  id: number
+  dish: DishType
 }
 
-const DishCard = ({ image, name, description }: Props) => (
+const DishCard = ({ dish }: Props) => (
   <S.Card>
-    <S.Image src={image} alt="" />
-    <S.Title>{name}</S.Title>
-    <S.Description>{formatDescription(description, 165)}</S.Description>
+    <S.Image src={dish.foto} alt="" />
+    <S.Title>{dish.nome}</S.Title>
+    <S.Description>{formatDescription(dish.descricao, 165)}</S.Description>
     <S.Button>Adicionar ao carrinho</S.Button>
   </S.Card>
 )
