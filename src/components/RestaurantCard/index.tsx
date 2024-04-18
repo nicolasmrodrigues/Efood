@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom'
 import star from '../../assets/images/star.png'
 import { RestaurantType } from '../../pages/Home'
+import { Button, Description, colors } from '../../styles'
 import formatDescription from '../../utils/FormatDescription'
 import * as S from './styles'
 
@@ -36,10 +38,12 @@ const RestaurantCard = ({ restaurant }: Props) => {
             <S.Icon src={star} />
           </div>
         </S.TitleContainer>
-        <S.Description>
+        <Description color={colors.pink}>
           {formatDescription(restaurant.descricao, 250)}
-        </S.Description>
-        <S.Button to={`/restaurant/${restaurant.id}`}>Saiba mais</S.Button>
+        </Description>
+        <Button type="secondary" as={Link} to={`/restaurant/${restaurant.id}`}>
+          Saiba mais
+        </Button>
       </S.TextContainer>
     </S.Card>
   )
