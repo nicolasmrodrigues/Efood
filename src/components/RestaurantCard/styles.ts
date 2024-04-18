@@ -38,12 +38,6 @@ export const Infos = styled.ul`
   gap: 8px;
 `
 
-export const Description = styled.p`
-  font-size: 14px;
-  line-height: 22px;
-  min-height: 88px;
-`
-
 export const Icon = styled.img`
   height: 20px;
   width: auto;
