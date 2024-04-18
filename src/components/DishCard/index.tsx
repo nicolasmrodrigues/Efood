@@ -41,7 +41,10 @@ const DishCard = ({ dish }: Props) => {
                 <img onClick={() => setIsvisible(false)} src={close} alt="" />
               </S.TitleBar>
               <p>{dish.descricao}</p>
-              <span>{`Serve: de ${dish.porcao}`}</span>
+              <span>
+                Serve:{' '}
+                {dish.porcao != '1 pessoa' ? `de ${dish.porcao}` : dish.porcao}
+              </span>
               <S.ModalButton>{`Adicionar ao carrinho - ${formatPrice(
                 dish.preco
               )}`}</S.ModalButton>
