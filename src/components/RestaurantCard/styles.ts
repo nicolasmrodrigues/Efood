@@ -16,8 +16,9 @@ export const Title = styled.h3`
 
 export const Image = styled.img`
   display: block;
-  max-width: 100%;
-  max-height: 100%;
+  max-height: 217px;
+  width: 100%;
+  object-fit: cover;
 `
 
 export const Info = styled.li`

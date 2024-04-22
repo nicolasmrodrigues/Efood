@@ -1,20 +1,15 @@
-import DishCard, { DishType } from '../../components/DishCard'
+import DishCard from '../../components/DishCard'
+import { DishType } from '../../pages/RestaurantProfile'
 import { List } from './styles'
 
 type Props = {
-  items: DishType[]
+  dishes: DishType[]
 }
 
-const DishesList = ({ items }: Props) => (
+const DishesList = ({ dishes }: Props) => (
   <List>
-    {items.map((item) => (
-      <DishCard
-        image={item.image}
-        name={item.name}
-        description={item.description}
-        id={item.id}
-        key={item.id}
-      />
+    {dishes.map((dish) => (
+      <DishCard dish={dish} key={dish.id} />
     ))}
   </List>
 )

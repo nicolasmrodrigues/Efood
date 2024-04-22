@@ -1,12 +1,17 @@
+import { RestaurantType } from '../../pages/Home'
 import { Container } from '../../styles'
 import * as S from './styles'
 
-const Banner = () => (
+type Props = {
+  restaurant: RestaurantType
+}
+
+const Banner = ({ restaurant }: Props) => (
   <>
-    <S.Banner>
+    <S.Banner style={{ backgroundImage: `url(${restaurant.capa})` }}>
       <Container>
-        <S.CuisineType>Italiana</S.CuisineType>
-        <S.Title>La Dolce Vita Trattoria</S.Title>
+        <S.CuisineType>{restaurant.tipo}</S.CuisineType>
+        <S.Title>{restaurant.titulo}</S.Title>
       </Container>
     </S.Banner>
   </>
