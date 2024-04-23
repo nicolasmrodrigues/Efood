@@ -12,6 +12,7 @@ function App() {
       <Provider store={store}>
         <GlobalStyle />
         <RoutesElement />
+        <Cart />
         <Footer />
       </Provider>
     </BrowserRouter>
