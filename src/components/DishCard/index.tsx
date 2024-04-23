@@ -4,19 +4,28 @@ import { DishType } from '../../pages/RestaurantProfile'
 import { Button, Container, Description, colors } from '../../styles'
 import close from '../../assets/images/close.png'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { add, open } from '../../store/reducers/cart'
 
 export type Props = {
   dish: DishType
 }
 
+export const formatPrice = (price: number) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(price)
+}
+
 const DishCard = ({ dish }: Props) => {
   const [isVisible, setIsvisible] = useState(false)
 
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(price)
+  const dispatch = useDispatch()
+
+  const addToCart = () => {
+    dispatch(add(dish))
+    dispatch(open())
   }
 
   return (
@@ -47,7 +56,10 @@ const DishCard = ({ dish }: Props) => {
                 Serve:{' '}
                 {dish.porcao != '1 pessoa' ? `de ${dish.porcao}` : dish.porcao}
               </span>
-              <S.ModalButton type="primary">{`Adicionar ao carrinho - ${formatPrice(
+              <S.ModalButton
+                onClick={addToCart}
+                type="primary"
+              >{`Adicionar ao carrinho - ${formatPrice(
                 dish.preco
               )}`}</S.ModalButton>
             </div>
