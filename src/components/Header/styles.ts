@@ -16,10 +16,11 @@ export const HeaderContainer = styled.header<Props>`
   text-align: center;
   color: ${colors.pink};
 
-  div,
-  a {
+  a,
+  button {
     font-size: 18px;
     font-weight: 900;
+    cursor: pointer;
     text-decoration: none;
     color: ${colors.pink};
   }
@@ -32,4 +33,9 @@ export const Title = styled.h2`
   width: 542px;
   margin: 0 auto;
   margin-top: 136px;
+`
+
+export const CartButton = styled.button`
+  background: transparent;
+  border: none;
 `

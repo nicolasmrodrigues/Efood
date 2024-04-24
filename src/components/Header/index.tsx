@@ -1,13 +1,19 @@
-import { HeaderContainer, Title } from './styles'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { CartButton, HeaderContainer, Title } from './styles'
 import logo from '../../assets/images/logo.png'
 import { Logo } from '../../styles'
-import { Link } from 'react-router-dom'
+import { RootReducer } from '../../store'
+import { open } from '../../store/reducers/cart'
 
 export type Props = {
   type?: 'primary' | 'secondary'
 }
 
 const Header = ({ type = 'primary' }: Props) => {
+  const { items } = useSelector((state: RootReducer) => state.cart)
+  const dispatch = useDispatch()
+
   if (type === 'primary') {
     return (
       <HeaderContainer type={type}>
@@ -15,10 +21,10 @@ const Header = ({ type = 'primary' }: Props) => {
         <h1>
           <Logo src={logo} alt="Efood" />
         </h1>
-        <div>
-          <span>0 </span>
+        <CartButton onClick={() => dispatch(open())}>
+          <span>{items.length} </span>
           produto(s) no carrinho
-        </div>
+        </CartButton>
       </HeaderContainer>
     )
   } else {
