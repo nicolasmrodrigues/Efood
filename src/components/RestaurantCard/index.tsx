@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom'
 import star from '../../assets/images/star.png'
-import { RestaurantType } from '../../pages/Home'
 import { Button, Description, colors } from '../../styles'
-import formatDescription from '../../utils/FormatDescription'
 import * as S from './styles'
+import { formatDescription } from '../../utils'
 
 type Props = {
   restaurant: RestaurantType

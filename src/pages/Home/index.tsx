@@ -2,18 +2,6 @@ import { useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import RestaurantsList from '../../containers/RestaurantsList'
 import { Container } from '../../styles'
-import { DishType } from '../RestaurantProfile'
-
-export type RestaurantType = {
-  id: number
-  titulo: string
-  destacado: boolean
-  tipo: string
-  avaliacao: number
-  descricao: string
-  capa: string
-  cardapio: DishType[]
-}
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState<RestaurantType[]>([])

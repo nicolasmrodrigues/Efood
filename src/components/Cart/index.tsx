@@ -4,19 +4,21 @@ import { Button } from '../../styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
 import { remove } from '../../store/reducers/cart'
-import { formatPrice } from '../DishCard'
-import Sidebar from '../Sidebar'
+import { open as openDelivery } from '../../store/reducers/delivery'
+import { close as closeCart } from '../../store/reducers/cart'
+import { getTotalPrice, formatPrice } from '../../utils'
 
 const Cart = () => {
-  const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
+  const { items } = useSelector((state: RootReducer) => state.cart)
   const dispatch = useDispatch()
 
-  const getTotalPrice = () => {
-    return items.reduce((total, current) => total + current.preco, 0)
+  const goToDelivery = () => {
+    dispatch(closeCart())
+    dispatch(openDelivery())
   }
 
   return (
-    <Sidebar isOpen={isOpen}>
+    <>
       {items.length > 0 ? (
         <>
           <ul>
@@ -37,14 +39,16 @@ const Cart = () => {
           </ul>
           <TotalPrice>
             <span>Valor total</span>
-            <span>{formatPrice(getTotalPrice())}</span>
+            <span>{formatPrice(getTotalPrice(items))}</span>
           </TotalPrice>
-          <Button type="primary">Continuar com a entrega</Button>
+          <Button type="primary" onClick={goToDelivery}>
+            Continuar com a entrega
+          </Button>
         </>
       ) : (
         <Title>Você ainda não adicionou um item ao carrinho</Title>
       )}
-    </Sidebar>
+    </>
   )
 }
 

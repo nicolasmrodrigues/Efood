@@ -1,21 +1,13 @@
-import formatDescription from '../../utils/FormatDescription'
+import { formatDescription, formatPrice } from '../../utils'
 import * as S from './styles'
-import { DishType } from '../../pages/RestaurantProfile'
 import { Button, Container, Description, colors } from '../../styles'
 import close from '../../assets/images/close.png'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { add, open } from '../../store/reducers/cart'
 
-export type Props = {
+type Props = {
   dish: DishType
-}
-
-export const formatPrice = (price: number) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(price)
 }
 
 const DishCard = ({ dish }: Props) => {

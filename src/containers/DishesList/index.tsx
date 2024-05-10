@@ -1,5 +1,4 @@
 import DishCard from '../../components/DishCard'
-import { DishType } from '../../pages/RestaurantProfile'
 import { List } from './styles'
 
 type Props = {

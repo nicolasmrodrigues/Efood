@@ -4,16 +4,6 @@ import Header from '../../components/Header'
 import DishesList from '../../containers/DishesList'
 import { Container } from '../../styles'
 import { useParams } from 'react-router-dom'
-import { RestaurantType } from '../Home'
-
-export type DishType = {
-  foto: string
-  preco: number
-  id: number
-  nome: string
-  descricao: string
-  porcao: string
-}
 
 const RestaurantProfile = () => {
   const [dishes, setDishes] = useState<DishType[]>([])

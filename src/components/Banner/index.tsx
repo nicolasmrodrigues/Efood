@@ -1,4 +1,3 @@
-import { RestaurantType } from '../../pages/Home'
 import { Container } from '../../styles'
 import * as S from './styles'
 

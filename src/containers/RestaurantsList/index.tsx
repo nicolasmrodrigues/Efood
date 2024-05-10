@@ -1,4 +1,3 @@
-import { RestaurantType } from '../../pages/Home'
 import RestaurantCard from '../../components/RestaurantCard'
 import { List } from './styles'
 

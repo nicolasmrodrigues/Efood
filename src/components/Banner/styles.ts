@@ -35,12 +35,12 @@ export const Banner = styled.div`
   }
 `
 
-export const CuisineType = styled.h2`
+export const CuisineType = styled.span`
   font-weight: 100;
   color: #fff;
 `
 
-export const Title = styled.h1`
+export const Title = styled.h2`
   font-weight: 900;
   color: #fff;
   width: 672px;
