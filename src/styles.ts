@@ -44,31 +44,4 @@ export const Description = styled.p<DescriptionProps>`
   color: ${(props) => props.color};
 `
 
-type ButtonProps = {
-  type: 'primary' | 'secondary'
-}
-
-export const Button = styled.button<ButtonProps>`
-  display: inline-block;
-  width: ${(props) => (props.type === 'primary' ? '100%' : 'auto')};
-  cursor: pointer;
-  padding: ${(props) => (props.type === 'primary' ? '4px 0' : '4px 6px')};
-  background-color: ${(props) =>
-    props.type === 'primary' ? colors.light_pink : colors.pink};
-  color: ${(props) =>
-    props.type === 'primary' ? colors.pink : colors.light_pink};
-  font-weight: 700;
-  font-size: 14px;
-  border: none;
-  text-align: center;
-  margin-top: 8px;
-  transition: background-color ease 0.2s;
-  text-decoration: none;
-
-  &:hover {
-    background-color: ${(props) =>
-      props.type === 'primary' ? '#eddccc' : '#cf5b5b'};
-  }
-`
-
 export default GlobalStyle

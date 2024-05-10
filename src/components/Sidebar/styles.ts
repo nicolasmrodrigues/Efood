@@ -3,7 +3,7 @@ import { colors } from '../../styles'
 
 export const Container = styled.div`
   position: fixed;
-  display: none;
+  display: flex;
   top: 0;
   left: 0;
   width: 100%;
@@ -11,8 +11,22 @@ export const Container = styled.div`
   z-index: 1;
   justify-content: flex-end;
 
-  &.visible {
-    display: flex;
+  color: ${colors.light_pink};
+
+  .visible {
+    display: block;
+  }
+
+  .invisible {
+    display: none;
+  }
+
+  h4 {
+    margin-bottom: 16px;
+  }
+
+  .margin-bottom {
+    margin-bottom: 24px;
   }
 `
 
@@ -28,4 +42,65 @@ export const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
   width: 100%;
   height: 100%;
+`
+
+export const Content = styled.div`
+  #address-numbers {
+    display: grid;
+    grid-template-columns: 152px 152px;
+    justify-content: space-between;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 22px;
+    margin-bottom: 24px;
+  }
+
+  #security {
+    display: grid;
+    grid-template-columns: 228px 87px;
+    justify-content: space-between;
+  }
+
+  #expiration {
+    display: grid;
+    grid-template-columns: 155px 155px;
+    justify-content: space-between;
+  }
+`
+
+export const Label = styled.label`
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 8px 0;
+`
+
+export const Input = styled.input`
+  padding: 8px;
+  width: 100%;
+  font-weight: 700;
+  font-size: 14px;
+  color: #4b4b4b;
+  border: none;
+`
+
+export const CartItem = styled.li`
+  display: flex;
+  margin-bottom: 16px;
+  background-color: ${colors.light_pink};
+  padding: 8px 8px 12px 8px;
+  position: relative;
+  color: ${colors.pink};
+
+  h4 {
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 16px;
+  }
+
+  span {
+    font-size: 14px;
+  }
 `

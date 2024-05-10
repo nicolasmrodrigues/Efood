@@ -1,6 +1,6 @@
 import { CartItem, DeleteIcon, Image, Title, TotalPrice } from './styles'
 import trashBin from '../../assets/images/trash-bin.png'
-import { Button } from '../../styles'
+import Button from '../Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
 import { remove } from '../../store/reducers/cart'
@@ -41,9 +41,7 @@ const Cart = () => {
             <span>Valor total</span>
             <span>{formatPrice(getTotalPrice(items))}</span>
           </TotalPrice>
-          <Button type="primary" onClick={goToDelivery}>
-            Continuar com a entrega
-          </Button>
+          <Button onClick={goToDelivery}>Continuar com a entrega</Button>
         </>
       ) : (
         <Title>Você ainda não adicionou um item ao carrinho</Title>

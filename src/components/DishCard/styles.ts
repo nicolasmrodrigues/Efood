@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { Button, Description, colors } from '../../styles'
+import { Description, colors } from '../../styles'
+import Button from '../Button'
 
 export const Card = styled.li`
   padding: 8px;

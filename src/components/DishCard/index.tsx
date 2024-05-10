@@ -1,6 +1,7 @@
 import { formatDescription, formatPrice } from '../../utils'
 import * as S from './styles'
-import { Button, Container, Description, colors } from '../../styles'
+import { Container, Description, colors } from '../../styles'
+import Button from '../Button'
 import close from '../../assets/images/close.png'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -28,7 +29,7 @@ const DishCard = ({ dish }: Props) => {
         <Description color={colors.light_pink}>
           {formatDescription(dish.descricao, 165)}
         </Description>
-        <Button type="primary" onClick={() => setIsvisible(true)}>
+        <Button onClick={() => setIsvisible(true)}>
           Adicionar ao carrinho
         </Button>
       </S.Card>
@@ -50,7 +51,6 @@ const DishCard = ({ dish }: Props) => {
               </span>
               <S.ModalButton
                 onClick={addToCart}
-                type="primary"
               >{`Adicionar ao carrinho - ${formatPrice(
                 dish.preco
               )}`}</S.ModalButton>
