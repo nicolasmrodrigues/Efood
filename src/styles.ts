@@ -44,4 +44,11 @@ export const Description = styled.p<DescriptionProps>`
   color: ${(props) => props.color};
 `
 
+export const Label = styled.label`
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 8px 0;
+`
+
 export default GlobalStyle

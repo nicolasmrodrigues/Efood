@@ -19,6 +19,7 @@ const DishCard = ({ dish }: Props) => {
   const addToCart = () => {
     dispatch(add(dish))
     dispatch(open())
+    setIsvisible(false)
   }
 
   return (

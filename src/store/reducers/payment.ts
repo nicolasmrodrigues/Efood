@@ -1,11 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 type PaymentState = {
   isOpen: boolean
+  info: PaymentInfo
 }
 
 const initialState: PaymentState = {
-  isOpen: false
+  isOpen: false,
+  info: {
+    cardName: '',
+    cardNumber: '',
+    cardCode: '',
+    cardExpirationMonth: '',
+    cardExpirationYear: ''
+  }
 }
 
 const PaymentSlice = createSlice({
@@ -17,9 +25,22 @@ const PaymentSlice = createSlice({
     },
     close: (state) => {
       state.isOpen = false
+    },
+    clear: (state) => {
+      state.isOpen = false
+      state.info = {
+        cardName: '',
+        cardNumber: '',
+        cardCode: '',
+        cardExpirationMonth: '',
+        cardExpirationYear: ''
+      }
+    },
+    setInfo: (state, action: PayloadAction<PaymentInfo>) => {
+      state.info = action.payload
     }
   }
 })
 
-export const { open, close } = PaymentSlice.actions
+export const { open, close, clear, setInfo } = PaymentSlice.actions
 export default PaymentSlice.reducer
