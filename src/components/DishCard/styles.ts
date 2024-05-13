@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Description, colors } from '../../styles'
-import Button from '../Button'
+import { Button } from '../Button/styles'
 
 export const Card = styled.li`
   padding: 8px;
@@ -32,6 +32,13 @@ export const Modal = styled.div`
   line-height: 22px;
   z-index: 1;
   align-items: center;
+
+  ${Button} {
+    text-align: center;
+    width: 220px;
+    padding: 4px 8px;
+    margin-top: 16px;
+  }
 }
 
   &.visible {
@@ -91,13 +98,6 @@ export const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-`
-
-export const ModalButton = styled(Button)`
-  text-align: center;
-  width: 220px;
-  padding: 4px 8px;
-  margin-top: 16px;
 `
 
 export const TextContainer = styled.div`

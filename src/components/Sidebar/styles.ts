@@ -49,10 +49,17 @@ export const Form = styled.form`
     justify-content: space-between;
   }
 
-  p {
+  input {
+    padding: 8px;
+    width: 100%;
+    font-weight: 700;
     font-size: 14px;
-    line-height: 22px;
-    margin-bottom: 24px;
+    color: #4b4b4b;
+    border: 2px solid transparent;
+
+    &.error {
+      border: 2px solid red;
+    }
   }
 
   #security {
@@ -73,15 +80,6 @@ export const Label = styled.label`
   font-size: 14px;
   font-weight: bold;
   margin: 8px 0;
-`
-
-export const Input = styled.input`
-  padding: 8px;
-  width: 100%;
-  font-weight: 700;
-  font-size: 14px;
-  color: #4b4b4b;
-  border: none;
 `
 
 export const CartItem = styled.li`

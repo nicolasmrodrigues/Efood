@@ -49,11 +49,9 @@ const DishCard = ({ dish }: Props) => {
                 Serve:{' '}
                 {dish.porcao != '1 pessoa' ? `de ${dish.porcao}` : dish.porcao}
               </span>
-              <S.ModalButton
-                onClick={addToCart}
-              >{`Adicionar ao carrinho - ${formatPrice(
-                dish.preco
-              )}`}</S.ModalButton>
+              <Button onClick={addToCart}>
+                {`Adicionar ao carrinho - ${formatPrice(dish.preco)}`}
+              </Button>
             </div>
           </S.ModalContent>
         </Container>

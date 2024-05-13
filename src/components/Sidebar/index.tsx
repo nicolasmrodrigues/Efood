@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   Container,
   Form,
-  Input,
   Label,
   Overlay,
   Sidebar as SidebarStyle
@@ -20,6 +19,8 @@ import { formatPrice, getTotalPrice } from '../../utils'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useState } from 'react'
+import InputMask from 'react-input-mask'
+import { useNavigate } from 'react-router-dom'
 
 const Sidebar = () => {
   const { isOpen: cartIsOpen, items } = useSelector(
@@ -32,6 +33,7 @@ const Sidebar = () => {
     (state: RootReducer) => state.payment
   )
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const goToCart = () => {
     dispatch(closeDelivery())
@@ -55,6 +57,7 @@ const Sidebar = () => {
     dispatch(closePayment())
     deliveryForm.resetForm()
     paymentForm.resetForm()
+    navigate('/')
   }
 
   const getData = (delivery: DeliveryInfo, payment: PaymentInfo) => {
@@ -91,6 +94,14 @@ const Sidebar = () => {
     }
   }
 
+  const checkInputError = (field: string) => {
+    const error =
+      (field in deliveryForm.touched && field in deliveryForm.errors) ||
+      (field in paymentForm.touched && field in paymentForm.errors)
+
+    return error
+  }
+
   const deliveryForm = useFormik({
     initialValues: {
       receiver: '',
@@ -110,7 +121,10 @@ const Sidebar = () => {
       city: Yup.string()
         .min(4, 'O campo da cidade precisa ter pelo menos 4 caracteres')
         .required('O campo é obrigatório'),
-      zipCode: Yup.string().required('O campo é obrigatório'),
+      zipCode: Yup.string()
+        .min(9, 'O campo deve ter 9 caracteres')
+        .max(9, 'O campo deve ter 9 caracteres')
+        .required('O campo é obrigatório'),
       number: Yup.string().required('O campo é obrigatório'),
       complement: Yup.string().min(
         5,
@@ -135,8 +149,8 @@ const Sidebar = () => {
         .min(5, 'O campo precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
       cardNumber: Yup.string()
-        .min(16, 'O campo precisa ter 16 caracteres')
-        .max(16, 'O campo precisa ter 16 caracteres')
+        .min(19, 'O campo precisa ter 19 caracteres')
+        .max(19, 'O campo precisa ter 19 caracteres')
         .required('O campo é obrigatório'),
       cardCode: Yup.string()
         .min(3, 'O campo precisa ter 3 caracteres')
@@ -190,14 +204,14 @@ const Sidebar = () => {
           <Overlay onClick={() => dispatch(closeDelivery())} />
           <SidebarStyle>
             <Form onSubmit={deliveryForm.handleSubmit}>
-              {`${cartIsOpen}, ${deliveryIsOpen}, ${paymentIsOpen}`}
               <h4>Entrega</h4>
               <div>
                 <Label htmlFor="receiver">Quem irá receber</Label>
-                <Input
+                <input
                   type="text"
                   id="receiver"
                   name="receiver"
+                  className={checkInputError('receiver') ? 'error' : ''}
                   value={deliveryForm.values.receiver}
                   onChange={deliveryForm.handleChange}
                   onBlur={deliveryForm.handleBlur}
@@ -205,10 +219,11 @@ const Sidebar = () => {
               </div>
               <div>
                 <Label htmlFor="description">Endereço</Label>
-                <Input
+                <input
                   type="text"
                   id="description"
                   name="description"
+                  className={checkInputError('description') ? 'error' : ''}
                   value={deliveryForm.values.description}
                   onChange={deliveryForm.handleChange}
                   onBlur={deliveryForm.handleBlur}
@@ -216,10 +231,11 @@ const Sidebar = () => {
               </div>
               <div>
                 <Label htmlFor="city">Cidade</Label>
-                <Input
+                <input
                   type="text"
                   id="city"
                   name="city"
+                  className={checkInputError('city') ? 'error' : ''}
                   value={deliveryForm.values.city}
                   onChange={deliveryForm.handleChange}
                   onBlur={deliveryForm.handleBlur}
@@ -228,21 +244,25 @@ const Sidebar = () => {
               <div id="address-numbers">
                 <div>
                   <Label htmlFor="zipCode">CEP</Label>
-                  <Input
+                  <InputMask
                     type="text"
                     id="zipCode"
                     name="zipCode"
+                    className={checkInputError('zipCode') ? 'error' : ''}
                     value={deliveryForm.values.zipCode}
                     onChange={deliveryForm.handleChange}
                     onBlur={deliveryForm.handleBlur}
+                    mask="99999-999"
+                    maskChar={''}
                   />
                 </div>
                 <div>
                   <Label htmlFor="number">Número</Label>
-                  <Input
+                  <input
                     type="text"
                     id="number"
                     name="number"
+                    className={checkInputError('number') ? 'error' : ''}
                     value={deliveryForm.values.number}
                     onChange={deliveryForm.handleChange}
                     onBlur={deliveryForm.handleBlur}
@@ -251,16 +271,22 @@ const Sidebar = () => {
               </div>
               <div className="margin-bottom">
                 <Label htmlFor="complement">Complemento (opcional)</Label>
-                <Input
+                <input
                   type="text"
                   id="complement"
                   name="complement"
+                  className={checkInputError('complement') ? 'error' : ''}
                   value={deliveryForm.values.complement}
                   onChange={deliveryForm.handleChange}
                   onBlur={deliveryForm.handleBlur}
                 />
               </div>
-              <Button type="submit" onClick={deliveryForm.handleSubmit}>
+              <Button
+                type="submit"
+                onClick={() => {
+                  console.log(deliveryForm.errors)
+                }}
+              >
                 Continuar com o pagamento
               </Button>
               <Button type="button" onClick={goToCart}>
@@ -288,10 +314,11 @@ const Sidebar = () => {
                 </h4>
                 <div>
                   <Label htmlFor="cardName">Nome no cartão</Label>
-                  <Input
+                  <input
                     type="text"
                     id="cardName"
                     name="cardName"
+                    className={checkInputError('cardName') ? 'error' : ''}
                     value={paymentForm.values.cardName}
                     onChange={paymentForm.handleChange}
                     onBlur={paymentForm.handleBlur}
@@ -300,24 +327,30 @@ const Sidebar = () => {
                 <div id="security">
                   <div>
                     <Label htmlFor="cardNumber">Número do cartão</Label>
-                    <Input
+                    <InputMask
                       type="text"
                       id="cardNumber"
                       name="cardNumber"
+                      className={checkInputError('cardNumber') ? 'error' : ''}
                       value={paymentForm.values.cardNumber}
                       onChange={paymentForm.handleChange}
                       onBlur={paymentForm.handleBlur}
+                      mask="9999 9999 9999 9999"
+                      maskChar={''}
                     />
                   </div>
                   <div>
                     <Label htmlFor="cardCode">CVV</Label>
-                    <Input
+                    <InputMask
                       type="text"
                       id="cardCode"
                       name="cardCode"
+                      className={checkInputError('cardCode') ? 'error' : ''}
                       value={paymentForm.values.cardCode}
                       onChange={paymentForm.handleChange}
                       onBlur={paymentForm.handleBlur}
+                      mask="999"
+                      maskChar={''}
                     />
                   </div>
                 </div>
@@ -326,26 +359,36 @@ const Sidebar = () => {
                     <Label htmlFor="cardExpirationMonth">
                       Mês de vencimento
                     </Label>
-                    <Input
+                    <InputMask
                       type="text"
                       id="cardExpirationMonth"
                       name="cardExpirationMonth"
+                      className={
+                        checkInputError('cardExpirationMonth') ? 'error' : ''
+                      }
                       value={paymentForm.values.cardExpirationMonth}
                       onChange={paymentForm.handleChange}
                       onBlur={paymentForm.handleBlur}
+                      mask="99"
+                      maskChar={''}
                     />
                   </div>
                   <div>
                     <Label htmlFor="cardExpirationYear">
                       Ano de vencimento
                     </Label>
-                    <Input
+                    <InputMask
                       type="text"
                       id="cardExpirationYear"
                       name="cardExpirationYear"
+                      className={
+                        checkInputError('cardExpirationYear') ? 'error' : ''
+                      }
                       value={paymentForm.values.cardExpirationYear}
                       onChange={paymentForm.handleChange}
                       onBlur={paymentForm.handleBlur}
+                      mask="9999"
+                      maskChar={''}
                     />
                   </div>
                 </div>
