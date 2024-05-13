@@ -13,14 +13,6 @@ export const Container = styled.div`
 
   color: ${colors.light_pink};
 
-  .visible {
-    display: block;
-  }
-
-  .invisible {
-    display: none;
-  }
-
   h4 {
     margin-bottom: 16px;
   }
@@ -36,6 +28,12 @@ export const Sidebar = styled.aside`
   width: 100%;
   height: 100%;
   padding: 32px 8px;
+
+  p {
+    font-size: 14px;
+    line-height: 22px;
+    margin-bottom: 24px;
+  }
 `
 
 export const Overlay = styled.div`
@@ -44,7 +42,7 @@ export const Overlay = styled.div`
   height: 100%;
 `
 
-export const Content = styled.div`
+export const Form = styled.form`
   #address-numbers {
     display: grid;
     grid-template-columns: 152px 152px;

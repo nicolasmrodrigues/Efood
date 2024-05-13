@@ -2,7 +2,7 @@ import DishCard from '../../components/DishCard'
 import { List } from './styles'
 
 type Props = {
-  dishes: DishType[]
+  dishes: Dish[]
 }
 
 const DishesList = ({ dishes }: Props) => (

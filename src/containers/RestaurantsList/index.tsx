@@ -2,7 +2,7 @@ import RestaurantCard from '../../components/RestaurantCard'
 import { List } from './styles'
 
 type Props = {
-  restaurants: RestaurantType[]
+  restaurants: Restaurant[]
 }
 
 const RestaurantsList = ({ restaurants }: Props) => (

@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { add, open } from '../../store/reducers/cart'
 
 type Props = {
-  dish: DishType
+  dish: Dish
 }
 
 const DishCard = ({ dish }: Props) => {

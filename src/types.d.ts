@@ -1,4 +1,4 @@
-declare type DishType = {
+declare type Dish = {
   foto: string
   preco: number
   id: number
@@ -7,7 +7,7 @@ declare type DishType = {
   porcao: string
 }
 
-declare type RestaurantType = {
+declare type Restaurant = {
   id: number
   titulo: string
   destacado: boolean
@@ -15,5 +15,27 @@ declare type RestaurantType = {
   avaliacao: number
   descricao: string
   capa: string
-  cardapio: DishType[]
+  cardapio: Dish[]
+}
+
+declare type DeliveryInfo = {
+  receiver: string
+  description: string
+  city: string
+  zipCode: string
+  number: string
+  complement: string
+}
+
+declare type PaymentInfo = {
+  cardName: string
+  cardNumber: string
+  cardCode: string
+  cardExpirationMonth: string
+  cardExpirationYear: string
+}
+
+declare type Product = {
+  id: number
+  price: number
 }

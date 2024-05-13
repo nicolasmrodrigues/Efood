@@ -6,7 +6,7 @@ import { formatDescription } from '../../utils'
 import Button from '../Button'
 
 type Props = {
-  restaurant: RestaurantType
+  restaurant: Restaurant
 }
 
 const RestaurantCard = ({ restaurant }: Props) => {

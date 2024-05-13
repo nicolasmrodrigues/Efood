@@ -6,8 +6,8 @@ import { Container } from '../../styles'
 import { useParams } from 'react-router-dom'
 
 const RestaurantProfile = () => {
-  const [dishes, setDishes] = useState<DishType[]>([])
-  const [restaurant, setRestaurant] = useState<RestaurantType>()
+  const [dishes, setDishes] = useState<Dish[]>([])
+  const [restaurant, setRestaurant] = useState<Restaurant>()
   const { id } = useParams()
 
   useEffect(() => {

@@ -5,7 +5,7 @@ export const formatDescription = (description: string, size: number) => {
   return description
 }
 
-export const getTotalPrice = (items: DishType[]) => {
+export const getTotalPrice = (items: Dish[]) => {
   return items.reduce((total, current) => total + current.preco, 0)
 }
 

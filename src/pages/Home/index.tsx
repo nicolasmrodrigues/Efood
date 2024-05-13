@@ -4,7 +4,7 @@ import RestaurantsList from '../../containers/RestaurantsList'
 import { Container } from '../../styles'
 
 const Home = () => {
-  const [restaurants, setRestaurants] = useState<RestaurantType[]>([])
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([])
 
   useEffect(() => {
     fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
