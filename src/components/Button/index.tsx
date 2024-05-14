@@ -7,6 +7,7 @@ export type Props = {
   onClick?: (e?: FormEvent<HTMLFormElement>) => void
   children: string
   type?: string
+  disabled?: boolean
   to?: string
   as?:
     | React.ForwardRefExoticComponent<
@@ -20,10 +21,18 @@ const Button = ({
   onClick,
   children,
   type = 'button',
+  disabled,
   to,
   as
 }: Props) => (
-  <ButtonStyle variant={variant} onClick={onClick} type={type} as={as} to={to}>
+  <ButtonStyle
+    variant={variant}
+    onClick={onClick}
+    type={type}
+    disabled={disabled}
+    as={as}
+    to={to}
+  >
     {children}
   </ButtonStyle>
 )

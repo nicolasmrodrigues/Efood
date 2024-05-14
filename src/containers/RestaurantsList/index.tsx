@@ -2,14 +2,15 @@ import RestaurantCard from '../../components/RestaurantCard'
 import { List } from './styles'
 
 type Props = {
-  restaurants: Restaurant[]
+  restaurants?: Restaurant[]
 }
 
 const RestaurantsList = ({ restaurants }: Props) => (
   <List>
-    {restaurants.map((restaurant) => (
-      <RestaurantCard restaurant={restaurant} key={restaurant.id} />
-    ))}
+    {restaurants &&
+      restaurants.map((restaurant) => (
+        <RestaurantCard restaurant={restaurant} key={restaurant.id} />
+      ))}
   </List>
 )
 

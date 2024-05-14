@@ -3,7 +3,6 @@ import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
 import { RootReducer } from '../../store'
-import { useState } from 'react'
 import { formatPrice, getTotalPrice } from '../../utils'
 import { Label } from '../../styles'
 import InputMask from 'react-input-mask'
@@ -15,6 +14,7 @@ import { useNavigate } from 'react-router-dom'
 import { setInfo as setPaymentInfo } from '../../store/reducers/payment'
 import { clear as clearDelivery } from '../../store/reducers/delivery'
 import { clear as clearPayment } from '../../store/reducers/payment'
+import { usePurchaseMutation } from '../../services/api'
 
 const Payment = () => {
   const { info: deliveryInfo } = useSelector(
@@ -25,8 +25,7 @@ const Payment = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  const [orderId, setOrderId] = useState(false)
+  const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
 
   const getData = (delivery: DeliveryInfo, payment: PaymentInfo) => {
     const products = items.map((item) => {
@@ -97,7 +96,7 @@ const Payment = () => {
         .max(4, 'O campo precisa ter 4 caracteres')
         .required('O campo é obrigatório')
     }),
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       dispatch(
         setPaymentInfo({
           cardName: values.cardName,
@@ -109,24 +108,8 @@ const Payment = () => {
       )
 
       const data = getData(deliveryInfo, values)
-      const response = await fetch(
-        'https://fake-api-tau.vercel.app/api/efood/checkout',
-        {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        }
-      )
-      const responseJson = await response.json()
 
-      if (response.ok) {
-        setOrderId(responseJson.orderId)
-      } else {
-        alert('Houve um erro no pedido')
-      }
+      purchase(data)
     }
   })
 
@@ -144,13 +127,35 @@ const Payment = () => {
 
   return (
     <>
-      {!orderId ? (
+      {isSuccess && data ? (
+        <>
+          <h4>Pedido realizado - {data.orderId}</h4>
+          <p>
+            Estamos felizes em informar que seu pedido já está em processo de
+            preparação e, em breve, será entregue no endereço fornecido
+          </p>
+          <p>
+            Gostaríamos de ressaltar que nossos entregadores não estão
+            autorizados a realizar cobranças extras.
+          </p>
+          <p>
+            Lembre-se da importância de higienizar as mãos após o recebimento do
+            pedido, garantindo assim sua segurança e bem-estar durante a
+            refeição.
+          </p>
+          <p>
+            Esperamos que desfrute de uma deliciosa e agradável experiência
+            gastronômica. Bom apetite!
+          </p>
+          <Button onClick={finishPurchase}>Concluir</Button>
+        </>
+      ) : (
         <Form
           onSubmit={paymentForm.handleSubmit}
           onReset={paymentForm.handleReset}
         >
           <h4>
-            Pagamento - Valor a pagar: R$ {formatPrice(getTotalPrice(items))}
+            Pagamento - Valor a pagar: {formatPrice(getTotalPrice(items))}
           </h4>
           <div>
             <Label htmlFor="cardName">Nome no cartão</Label>
@@ -226,35 +231,17 @@ const Payment = () => {
               />
             </div>
           </div>
-          <Button type="submit" onClick={paymentForm.handleSubmit}>
-            Finalizar pagamento
+          <Button
+            type="submit"
+            onClick={paymentForm.handleSubmit}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Finalizando pagamento...' : 'Finalizar pagamento'}
           </Button>
           <Button type="button" onClick={gotToDelivery}>
             Voltar para a edição de endereço
           </Button>
         </Form>
-      ) : (
-        <>
-          <h4>Pedido realizado - {orderId}</h4>
-          <p>
-            Estamos felizes em informar que seu pedido já está em processo de
-            preparação e, em breve, será entregue no endereço fornecido
-          </p>
-          <p>
-            Gostaríamos de ressaltar que nossos entregadores não estão
-            autorizados a realizar cobranças extras.
-          </p>
-          <p>
-            Lembre-se da importância de higienizar as mãos após o recebimento do
-            pedido, garantindo assim sua segurança e bem-estar durante a
-            refeição.
-          </p>
-          <p>
-            Esperamos que desfrute de uma deliciosa e agradável experiência
-            gastronômica. Bom apetite!
-          </p>
-          <Button onClick={finishPurchase}>Concluir</Button>
-        </>
       )}
     </>
   )
