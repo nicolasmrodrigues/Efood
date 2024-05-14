@@ -33,14 +33,25 @@ export const Banner = styled.div`
     font-size: 32px;
     position: absolute;
   }
+
+  @media (max-width: 768px) {
+    ${Container} {
+      padding: 24px;
+      padding-bottom: 32px;
+    }
+
+    * {
+      font-size: 24px;
+    }
+  }
 `
 
-export const CuisineType = styled.h2`
+export const CuisineType = styled.span`
   font-weight: 100;
   color: #fff;
 `
 
-export const Title = styled.h1`
+export const Title = styled.h2`
   font-weight: 900;
   color: #fff;
   width: 672px;

@@ -1,8 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { DishType } from '../../pages/RestaurantProfile'
 
 type CartState = {
-  items: DishType[]
+  items: Dish[]
   isOpen: boolean
 }
 
@@ -15,7 +14,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<DishType>) => {
+    add: (state, action: PayloadAction<Dish>) => {
       const AlredyInCart = state.items.find((item) => {
         return item.id === action.payload.id
       })
@@ -30,6 +29,9 @@ const cartSlice = createSlice({
         return item.id !== action.payload
       })
     },
+    clear: (state) => {
+      state.items = []
+    },
     open: (state) => {
       state.isOpen = true
     },
@@ -39,5 +41,5 @@ const cartSlice = createSlice({
   }
 })
 
-export const { add, remove, open, close } = cartSlice.actions
+export const { add, remove, clear, open, close } = cartSlice.actions
 export default cartSlice.reducer
