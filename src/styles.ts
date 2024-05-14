@@ -16,6 +16,10 @@ const GlobalStyle = createGlobalStyle`
     list-style: none;
   }
 
+  html, body {
+    overflow-x: hidden;
+  }
+
   body {
     background-color: ${colors.pinkish_white};
   }
@@ -25,11 +29,20 @@ export const Container = styled.div`
   max-width: 1024px;
   width: 100%;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    max-width: 364px;
+  }
 `
 
 export const Logo = styled.img`
   height: 58px;
   width: auto;
+
+  @media (max-width: 768px) {
+    height: 50px;
+    width: auto;
+  }
 `
 
 type DescriptionProps = {
@@ -44,31 +57,11 @@ export const Description = styled.p<DescriptionProps>`
   color: ${(props) => props.color};
 `
 
-type ButtonProps = {
-  type: 'primary' | 'secondary'
-}
-
-export const Button = styled.button<ButtonProps>`
-  display: inline-block;
-  width: ${(props) => (props.type === 'primary' ? '100%' : 'auto')};
-  cursor: pointer;
-  padding: ${(props) => (props.type === 'primary' ? '4px 0' : '4px 6px')};
-  background-color: ${(props) =>
-    props.type === 'primary' ? colors.light_pink : colors.pink};
-  color: ${(props) =>
-    props.type === 'primary' ? colors.pink : colors.light_pink};
-  font-weight: 700;
+export const Label = styled.label`
+  display: block;
   font-size: 14px;
-  border: none;
-  text-align: center;
-  margin-top: 8px;
-  transition: background-color ease 0.2s;
-  text-decoration: none;
-
-  &:hover {
-    background-color: ${(props) =>
-      props.type === 'primary' ? '#eddccc' : '#cf5b5b'};
-  }
+  font-weight: bold;
+  margin: 8px 0;
 `
 
 export default GlobalStyle

@@ -1,39 +1,24 @@
-import { useEffect, useState } from 'react'
 import Banner from '../../components/Banner'
 import Header from '../../components/Header'
 import DishesList from '../../containers/DishesList'
 import { Container } from '../../styles'
 import { useParams } from 'react-router-dom'
-import { RestaurantType } from '../Home'
-
-export type DishType = {
-  foto: string
-  preco: number
-  id: number
-  nome: string
-  descricao: string
-  porcao: string
-}
+import { useGetRestaurantQuery } from '../../services/api'
+import Loader from '../../components/Loader'
 
 const RestaurantProfile = () => {
-  const [dishes, setDishes] = useState<DishType[]>([])
-  const [restaurant, setRestaurant] = useState<RestaurantType>()
   const { id } = useParams()
 
-  useEffect(() => {
-    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setRestaurant(responseJson)
-        setDishes(responseJson.cardapio)
-      })
-  }, [id])
+  const { data: restaurant, isLoading } = useGetRestaurantQuery(id as string)
+  const dishes = restaurant?.cardapio
 
   return (
     <>
-      {restaurant && (
+      <Header />
+      {isLoading || !restaurant ? (
+        <Loader />
+      ) : (
         <>
-          <Header />
           <Banner restaurant={restaurant} />
           <Container>
             <DishesList dishes={dishes} />

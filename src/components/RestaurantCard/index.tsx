@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 import star from '../../assets/images/star.png'
-import { RestaurantType } from '../../pages/Home'
-import { Button, Description, colors } from '../../styles'
-import formatDescription from '../../utils/FormatDescription'
+import { Description, colors } from '../../styles'
 import * as S from './styles'
+import { formatDescription } from '../../utils'
+import Button from '../Button'
 
 type Props = {
-  restaurant: RestaurantType
+  restaurant: Restaurant
 }
 
 const RestaurantCard = ({ restaurant }: Props) => {
@@ -41,7 +41,11 @@ const RestaurantCard = ({ restaurant }: Props) => {
         <Description color={colors.pink}>
           {formatDescription(restaurant.descricao, 250)}
         </Description>
-        <Button type="secondary" as={Link} to={`/restaurant/${restaurant.id}`}>
+        <Button
+          variant="secondary"
+          as={Link}
+          to={`/restaurant/${restaurant.id}`}
+        >
           Saiba mais
         </Button>
       </S.TextContainer>

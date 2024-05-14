@@ -1,21 +1,14 @@
-import formatDescription from '../../utils/FormatDescription'
+import { formatDescription, formatPrice } from '../../utils'
 import * as S from './styles'
-import { DishType } from '../../pages/RestaurantProfile'
-import { Button, Container, Description, colors } from '../../styles'
+import { Container, Description, colors } from '../../styles'
+import Button from '../Button'
 import close from '../../assets/images/close.png'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { add, open } from '../../store/reducers/cart'
 
-export type Props = {
-  dish: DishType
-}
-
-export const formatPrice = (price: number) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(price)
+type Props = {
+  dish: Dish
 }
 
 const DishCard = ({ dish }: Props) => {
@@ -26,6 +19,7 @@ const DishCard = ({ dish }: Props) => {
   const addToCart = () => {
     dispatch(add(dish))
     dispatch(open())
+    setIsvisible(false)
   }
 
   return (
@@ -36,7 +30,7 @@ const DishCard = ({ dish }: Props) => {
         <Description color={colors.light_pink}>
           {formatDescription(dish.descricao, 165)}
         </Description>
-        <Button type="primary" onClick={() => setIsvisible(true)}>
+        <Button onClick={() => setIsvisible(true)}>
           Adicionar ao carrinho
         </Button>
       </S.Card>
@@ -56,12 +50,9 @@ const DishCard = ({ dish }: Props) => {
                 Serve:{' '}
                 {dish.porcao != '1 pessoa' ? `de ${dish.porcao}` : dish.porcao}
               </span>
-              <S.ModalButton
-                onClick={addToCart}
-                type="primary"
-              >{`Adicionar ao carrinho - ${formatPrice(
-                dish.preco
-              )}`}</S.ModalButton>
+              <Button onClick={addToCart}>
+                {`Adicionar ao carrinho - ${formatPrice(dish.preco)}`}
+              </Button>
             </div>
           </S.ModalContent>
         </Container>

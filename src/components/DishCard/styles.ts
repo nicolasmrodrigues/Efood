@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { Button, Description, colors } from '../../styles'
+import { Description, colors } from '../../styles'
+import { Button } from '../Button/styles'
 
 export const Card = styled.li`
   padding: 8px;
@@ -31,6 +32,17 @@ export const Modal = styled.div`
   line-height: 22px;
   z-index: 1;
   align-items: center;
+
+  ${Button} {
+    text-align: center;
+    width: 220px;
+    padding: 4px 8px;
+    margin-top: 16px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
 }
 
   &.visible {
@@ -48,6 +60,11 @@ export const ModalContent = styled.div`
   span {
     display: block;
   }
+
+  @media (max-width: 768px) {
+    display: block;
+    padding: 24px;
+  }
 `
 
 export const ModalImage = styled.img`
@@ -55,6 +72,13 @@ export const ModalImage = styled.img`
   height: 280px;
   object-fit: cover;
   margin-right: 24px;
+
+  @media (max-width: 768px) {
+    margin: 16px 0 8px 0;
+    margin-right: 0;
+    width: 100%;
+    height: 224px;
+  }
 `
 
 export const ModalTitle = styled.h4`
@@ -90,13 +114,6 @@ export const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-`
-
-export const ModalButton = styled(Button)`
-  text-align: center;
-  width: 220px;
-  padding: 4px 8px;
-  margin-top: 16px;
 `
 
 export const TextContainer = styled.div`
