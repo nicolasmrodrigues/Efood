@@ -14,15 +14,21 @@ export const Form = styled.form`
     }
   }
 
-  #security {
-    display: grid;
-    grid-template-columns: 228px 87px;
-    justify-content: space-between;
-  }
+  @media (min-width: 768px) {
+    #security {
+      display: grid;
+      grid-template-columns: 228px 87px;
+      justify-content: space-between;
+    }
 
-  #expiration {
-    display: grid;
-    grid-template-columns: 155px 155px;
-    justify-content: space-between;
+    #expiration {
+      display: grid;
+      grid-template-columns: 155px 155px;
+      justify-content: space-between;
+    }
   }
+`
+
+export const ButtonsContainer = styled.div`
+  margin-top: 24px;
 `

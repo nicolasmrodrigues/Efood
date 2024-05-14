@@ -1,6 +1,6 @@
 import InputMask from 'react-input-mask'
 import { Label } from '../../styles'
-import { Form } from './styles'
+import { ButtonsContainer, Form } from './styles'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
@@ -143,7 +143,7 @@ const Delivery = () => {
           />
         </div>
       </div>
-      <div className="margin-bottom">
+      <div>
         <Label htmlFor="complement">Complemento (opcional)</Label>
         <input
           type="text"
@@ -155,12 +155,14 @@ const Delivery = () => {
           onBlur={deliveryForm.handleBlur}
         />
       </div>
-      <Button type="submit" onClick={deliveryForm.handleSubmit}>
-        Continuar com o pagamento
-      </Button>
-      <Button type="button" onClick={goToCart}>
-        Voltar para o carrinho
-      </Button>
+      <ButtonsContainer>
+        <Button type="submit" onClick={deliveryForm.handleSubmit}>
+          Continuar com o pagamento
+        </Button>
+        <Button type="button" onClick={goToCart}>
+          Voltar para o carrinho
+        </Button>
+      </ButtonsContainer>
     </Form>
   )
 }

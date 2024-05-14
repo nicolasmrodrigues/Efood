@@ -1,4 +1,4 @@
-import { Form } from './styles'
+import { ButtonsContainer, Form } from './styles'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
@@ -231,16 +231,18 @@ const Payment = () => {
               />
             </div>
           </div>
-          <Button
-            type="submit"
-            onClick={paymentForm.handleSubmit}
-            disabled={isLoading}
-          >
-            {isLoading ? 'Finalizando pagamento...' : 'Finalizar pagamento'}
-          </Button>
-          <Button type="button" onClick={gotToDelivery}>
-            Voltar para a edição de endereço
-          </Button>
+          <ButtonsContainer>
+            <Button
+              type="submit"
+              onClick={paymentForm.handleSubmit}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Finalizando pagamento...' : 'Finalizar pagamento'}
+            </Button>
+            <Button type="button" onClick={gotToDelivery}>
+              Voltar para a edição de endereço
+            </Button>
+          </ButtonsContainer>
         </Form>
       )}
     </>

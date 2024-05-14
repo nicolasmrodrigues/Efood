@@ -33,6 +33,17 @@ export const Banner = styled.div`
     font-size: 32px;
     position: absolute;
   }
+
+  @media (max-width: 768px) {
+    ${Container} {
+      padding: 24px;
+      padding-bottom: 32px;
+    }
+
+    * {
+      font-size: 24px;
+    }
+  }
 `
 
 export const CuisineType = styled.span`

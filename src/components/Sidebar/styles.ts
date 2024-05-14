@@ -34,10 +34,18 @@ export const Sidebar = styled.aside`
     line-height: 22px;
     margin-bottom: 24px;
   }
+
+  @media (max-width: 768px) {
+    max-width: 70vw;
+  }
 `
 
 export const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
   width: 100%;
   height: 100%;
+
+  @media (max-width: 768px) {
+    width: 30vw;
+  }
 `

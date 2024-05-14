@@ -38,6 +38,10 @@ export const Modal = styled.div`
     width: 220px;
     padding: 4px 8px;
     margin-top: 16px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 }
 
@@ -56,6 +60,11 @@ export const ModalContent = styled.div`
   span {
     display: block;
   }
+
+  @media (max-width: 768px) {
+    display: block;
+    padding: 24px;
+  }
 `
 
 export const ModalImage = styled.img`
@@ -63,6 +72,13 @@ export const ModalImage = styled.img`
   height: 280px;
   object-fit: cover;
   margin-right: 24px;
+
+  @media (max-width: 768px) {
+    margin: 16px 0 8px 0;
+    margin-right: 0;
+    width: 100%;
+    height: 224px;
+  }
 `
 
 export const ModalTitle = styled.h4`

@@ -12,8 +12,9 @@ export const HeaderContainer = styled.header<Props>`
   background-size: cover;
   background-repeat: no-repeat;
   padding: ${(props) =>
-    props.type == 'primary' ? '82px 171px' : '64px 0px 0px 0px'};
+    props.type == 'primary' ? '0 171px' : '64px 0px 0px 0px'};
   text-align: center;
+  align-items: center;
   color: ${colors.pink};
 
   a,
@@ -24,6 +25,21 @@ export const HeaderContainer = styled.header<Props>`
     text-decoration: none;
     color: ${colors.pink};
   }
+
+  @media (max-width: 768px) {
+    padding: ${(props) => props.type === 'primary' && '24px'};
+    align-items: ${(props) => props.type === 'primary' && 'center'};
+    height: ${(props) => (props.type === 'primary' ? '162px' : '316px')};
+
+    img {
+      height: ${(props) => props.type === 'secondary' && '58px'};
+      width: auto;
+    }
+
+    button {
+      width: 100px;
+    }
+  }
 `
 
 export const Title = styled.h2`
@@ -33,6 +49,12 @@ export const Title = styled.h2`
   width: 542px;
   margin: 0 auto;
   margin-top: 136px;
+
+  @media (max-width: 768px) {
+    width: auto;
+    font-size: 24px;
+    margin-top: 68px;
+  }
 `
 
 export const CartButton = styled.button`

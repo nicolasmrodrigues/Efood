@@ -2,9 +2,11 @@ import { styled } from 'styled-components'
 
 export const Form = styled.form`
   #address-numbers {
-    display: grid;
-    grid-template-columns: 152px 152px;
-    justify-content: space-between;
+    @media (min-width: 768px) {
+      display: grid;
+      grid-template-columns: 152px 152px;
+      justify-content: space-between;
+    }
   }
 
   input {
@@ -19,4 +21,8 @@ export const Form = styled.form`
       border: 2px solid red;
     }
   }
+`
+
+export const ButtonsContainer = styled.div`
+  margin-top: 24px;
 `

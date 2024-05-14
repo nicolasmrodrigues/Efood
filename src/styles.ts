@@ -16,6 +16,10 @@ const GlobalStyle = createGlobalStyle`
     list-style: none;
   }
 
+  html, body {
+    overflow-x: hidden;
+  }
+
   body {
     background-color: ${colors.pinkish_white};
   }
@@ -25,11 +29,20 @@ export const Container = styled.div`
   max-width: 1024px;
   width: 100%;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    max-width: 364px;
+  }
 `
 
 export const Logo = styled.img`
   height: 58px;
   width: auto;
+
+  @media (max-width: 768px) {
+    height: 50px;
+    width: auto;
+  }
 `
 
 type DescriptionProps = {
